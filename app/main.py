@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Security
 from app.models import Telemetry
+from app.security import verify_api_key
 
 app = FastAPI(
     title="Secure OT Telemetry Gateway",
@@ -13,11 +14,12 @@ def health_check():
 
 
 @app.post("/telemetry")
-def receive_telemetry(data: Telemetry):
+def receive_telemetry(data: Telemetry, 
+api_key: str = Security(verify_api_key)):
     return {
         "message": "Telemetry received",
         "device_id": data.device_id,
         "temperature": data.temperature,
         "pressure": data.pressure,
         "status": data.status
-    }
+    }   
