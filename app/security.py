@@ -1,7 +1,13 @@
+import os
+from dotenv import load_dotenv
+
 from fastapi import Security, HTTPException
 from fastapi.security import APIKeyHeader
 
-API_KEY = "demo-secure-key"
+load_dotenv()
+
+
+API_KEY = os.getenv("OT_API_KEY")
 
 api_key_header = APIKeyHeader(name="X-API-Key")
 
