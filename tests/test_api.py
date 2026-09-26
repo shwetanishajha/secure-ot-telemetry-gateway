@@ -17,9 +17,10 @@ def test_health_check():
 def test_invalid_temperature():
     response = client.post(
         "/telemetry",
+        headers={"X-API-Key": "demo-secure-key"},
         json={
             "device_id": "PLC-001",
-            "temperature": 500,
+            "temperature":      500,
             "pressure": 4.8,
             "status": "NORMAL"
         }
