@@ -20,10 +20,24 @@ def test_invalid_temperature():
         headers={"X-API-Key": "demo-secure-key"},
         json={
             "device_id": "PLC-001",
-            "temperature":      500,
+            "temperature": 500,
             "pressure": 4.8,
             "status": "NORMAL"
         }
     )
 
     assert response.status_code == 422
+
+
+def test_telemetry_requires_api_key():
+    response = client.post(
+        "/telemetry",
+        json={
+            "device_id": "PLC-001",
+            "temperature": 25,
+            "pressure": 4.8,
+            "status": "NORMAL"
+        }
+    )
+
+    assert response.status_code == 401
