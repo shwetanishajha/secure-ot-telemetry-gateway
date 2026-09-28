@@ -40,7 +40,7 @@ jobs:
         run: docker build -t secure-ot-gateway:ci .
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: secure-ot-gateway:ci
           format: table
