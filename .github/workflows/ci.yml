@@ -29,5 +29,12 @@ jobs:
           OT_API_KEY: demo-secure-key
         run: pytest
 
+      - name: Audit Python dependencies
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt
+
+
+
       - name: Build Docker image
         run: docker build -t secure-ot-gateway:ci .
